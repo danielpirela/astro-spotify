@@ -1,7 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import AsideMenu from "../components/AsideMenu.astro"
 ---
 
 <Layout title="Spotify">
-	<h1>1</h1>
+	<div id="app" class="relative h-screen p-2 gap-2">
+		<aside class="[grid-area:aside] flex flex-col overflow-y-auto rounded-lg">
+		<AsideMenu/>
+		</aside>
+		<main class="[grid-area:main] bg-zinc-900 rounded-lg overflow-y-auto">
+			main
+		</main>
+		<footer class="[grid-area:player] min-h-[60px] bg-black"/>
+	</div>
 </Layout>
+
+
+<style>
+	#app {
+		display: grid;
+		grid-template-areas:"aside main main" "player player player";
+		grid-template-columns: 350px 1fr;
+		grid-template-rows: 1fr auto;
+	}
+</style>
