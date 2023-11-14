@@ -1,26 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import AsideMenu from "../components/AsideMenu.astro"
+import Layout from '@/layouts/Layout.astro'
+import PlaylistCard from '@/components/PlaylistCard.astro'
+import { playlists } from '@/lib/data'
 ---
 
 <Layout title="Spotify">
-	<div id="app" class="relative h-screen p-2 gap-2">
-		<aside class="[grid-area:aside] flex flex-col overflow-y-auto rounded-lg">
-		<AsideMenu/>
-		</aside>
-		<main class="[grid-area:main] bg-zinc-900 rounded-lg overflow-y-auto">
-			main
-		</main>
-		<footer class="[grid-area:player] min-h-[60px] bg-black"/>
-	</div>
+    <div id="playlist-contaiter"
+    class="relative transition duration-100 bg-green-700"
+    >
+    <nav>
+        flecha
+    </nav>
+        <div class="relative z-20 px-6 pt-10">
+            <h1 class="text-4xl font-bold">Good Nigth</h1>
+            <div class="flex flex-wrap mt-6 gap-4">
+                {playlists.map(playlist => <PlaylistCard playlist={playlist}/>)}
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80">
+        </div>
+    </div>
 </Layout>
 
-
 <style>
-	#app {
-		display: grid;
-		grid-template-areas:"aside main main" "player player player";
-		grid-template-columns: 350px 1fr;
-		grid-template-rows: 1fr auto;
-	}
+    #playlist-contaiter {
+
+    }
 </style>
