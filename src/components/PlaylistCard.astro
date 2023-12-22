@@ -1,5 +1,6 @@
 ---
 import type { Playlist } from '@/lib/data'
+import { PlayButtonCard } from './PlayButtonCard'
 
 
 interface Props {
@@ -18,17 +19,29 @@ const {
 } = playlist
 
 
-const artistConvert = artists.join(", ")
+const artistConvert = artists.join(', ')
 ---
 
 
-<a href={"/#"} class="playlist-item flex flex-col relative overflow-hidden gap-2 hover:bg-zinc-600 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl bg-zinc-800 w-44 p-2 pb-6">
-    <picture class="flex-none aspect-square w-full h-auto">
-        <img src={cover} alt={`image cover of ${title}`} class="object-cover w-full h-full rounded-md">
-    </picture>
-    <div class="flex flex-col truncate ">
-        <p class="text-star font-medium ">{title}</p>
-        <p class="text-zinc-400 text-start">{artistConvert}</p>
+<article class="group relative rounded-md hover:bg-zinc-600 shadow-lg hover:shadow-xl bg-zinc-800 transition-all duration-300">
+
+    <div class="absolute right-4 bottom-10 translate-y-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:-translate-y-0 z-10"
+    >
+        <PlayButtonCard id={id} client:visible/>
     </div>
 
-</a>
+
+    <a href={`/playlist/${id}`} class="playlist-item flex flex-col relative overflow-hidden gap-2  w-44 p-2 pb-6 transition-all duration-300"
+transition:name=`playlist ${id} box`
+    >
+        <picture class="flex-none aspect-square w-full h-auto">
+            <img src={cover} alt={`image cover of ${title}`} class="object-cover w-full h-full rounded-md"
+        transition:name=`playlist ${id }'card' image`
+        >
+        </picture>
+        <div class="flex flex-col truncate ">
+            <p class="text-star font-medium ">{title}</p>
+            <p class="text-zinc-400 text-start">{artistConvert}</p>
+        </div>
+    </a>
+</article>

@@ -1,5 +1,7 @@
 ---
 import AsideMenu from "@/components/AsideMenu.astro"
+import { Player } from '@/components/Player'
+import { ViewTransitions } from 'astro:transitions';
 interface Props {
 	title: string;
 }
@@ -16,6 +18,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+        <ViewTransitions fallback='none'/>
 	</head>
 	<body>
         <div id="app" class="relative h-screen p-2 gap-2">
@@ -25,7 +28,9 @@ const { title } = Astro.props;
             <main class="[grid-area:main] bg-zinc-950 rounded-lg overflow-y-auto">
                 <slot />
             </main>
-            <footer class="[grid-area:player] min-h-[60px] bg-black"/>
+            <footer class="[grid-area:player] min-h-[60px] bg-black">
+                    <Player client:load transition:name="player" transition:persist/>
+            </footer>
         </div>
 	</body>
 </html>
@@ -46,6 +51,9 @@ const { title } = Astro.props;
 		background: #000;
         color: white;
 	}
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
 
 	@font-face {
         font-family: "CircularStd";
